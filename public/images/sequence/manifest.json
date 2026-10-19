@@ -1,0 +1,13 @@
+{
+  "count": 101,
+  "width": 1280,
+  "height": 720,
+  "format": "webp",
+  "prefix": "frame",
+  "pad": 4,
+  "start": 0,
+  "end": 10.005,
+  "reversed": false,
+  "first": "frame-0001.webp",
+  "last": "frame-0101.webp"
+}

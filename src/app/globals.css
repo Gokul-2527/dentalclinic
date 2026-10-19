@@ -1,0 +1,99 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+html { scroll-behavior: auto; } html.lenis, html.lenis body { height: auto; }
+body { @apply bg-cream font-sans text-cocoa antialiased; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+
+@font-face {
+  font-family: 'Suranna';
+  src: url('/font/Suranna-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-suranna {
+  font-family: 'Suranna', serif;
+}
+
+@font-face {
+  font-family: 'Rampart One';
+  src: url('/font/RampartOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-rampart-one {
+  font-family: 'Rampart One', serif;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-left var(--marquee-duration, 25s) linear infinite;
+}
+
+/* optional: pause when hovering */
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+
+@keyframes scroll-arrow {
+  0%   { opacity: 0; transform: translateY(-6px); }
+  50%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(6px); }
+}
+
+.animate-scroll-arrow {
+  animation: scroll-arrow 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-arrow {
+    animation: none;
+    opacity: 0.8;
+  }
+}
+
+
+@keyframes testimonial-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes testimonial-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.testimonial-left  { animation: testimonial-left  var(--t-duration, 50s) linear infinite; }
+.testimonial-right { animation: testimonial-right var(--t-duration, 50s) linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-left,
+  .testimonial-right { animation: none; }
+}
+
+
+@keyframes ap-draw {
+  to { stroke-dashoffset: 0; }
+}
+.ap-draw {
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  animation: ap-draw 0.8s ease-out forwards;
+}
+.ap-draw-delay {
+  animation-delay: 0.45s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ap-draw { animation: none; stroke-dashoffset: 0; }
+}
