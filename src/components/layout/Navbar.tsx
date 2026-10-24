@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const LINKS = [
@@ -13,7 +14,10 @@ const LINKS = [
 ] as const;
 
 export default function Navbar({ name }: { name: string }) {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isInnerPage = pathname !== "/";
+
+  const [scrolled, setScrolled] = useState(isInnerPage);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
@@ -28,11 +32,12 @@ export default function Navbar({ name }: { name: string }) {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 40);
+      // On homepage, toggle based on scroll. On inner pages, always stay scrolled (solid style).
+      setScrolled(isInnerPage || y > 40);
       setHidden(y > lastY.current && y > 240 && !openRef.current);
       lastY.current = y;
 
-      if (y < 200) setActive("");
+      if (y < 200 && !isInnerPage) setActive("");
 
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const p = max > 0 ? Math.min(1, y / max) : 0;
@@ -41,10 +46,11 @@ export default function Navbar({ name }: { name: string }) {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isInnerPage]);
 
-  // scroll-spy: highlight the section in the middle of the screen
+  // scroll-spy: highlight the section in the middle of the screen (only relevant on home)
   useEffect(() => {
+    if (isInnerPage) return;
     const targets = LINKS.map((l) => document.getElementById(l.id)).filter(
       (el): el is HTMLElement => el !== null,
     );
@@ -60,7 +66,7 @@ export default function Navbar({ name }: { name: string }) {
     );
     targets.forEach((t) => io.observe(t));
     return () => io.disconnect();
-  }, []);
+  }, [isInnerPage]);
 
   // mobile menu: lock body scroll, close on Escape or when resized to desktop
   useEffect(() => {
@@ -153,7 +159,7 @@ export default function Navbar({ name }: { name: string }) {
             })}
           </ul>
 
-          {/* desktop CTA with a fill that rises on hover */}
+          {/* desktop CTA */}
           <a
             href="/#appointment"
             className="group relative hidden items-center gap-2 overflow-hidden rounded-full border border-cream/60 px-5 py-2 text-sm transition-colors duration-300 hover:text-ember focus-visible:outline focus-visible:outline-2 focus-visible:outline-peach md:inline-flex"
@@ -171,7 +177,7 @@ export default function Navbar({ name }: { name: string }) {
             </span>
           </a>
 
-          {/* mobile burger that morphs into an X */}
+          {/* mobile burger */}
           <button
             type="button"
             aria-expanded={open}
@@ -210,7 +216,7 @@ export default function Navbar({ name }: { name: string }) {
         </nav>
       </header>
 
-      {/* mobile full-screen menu (outside <header> so the header's transform can't affect it) */}
+      {/* mobile full-screen menu */}
       <div
         id="mobile-menu"
         aria-hidden={!open}

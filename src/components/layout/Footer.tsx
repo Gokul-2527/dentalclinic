@@ -126,7 +126,7 @@ export default function Footer({ c }: { c: SiteContent }) {
             © {new Date().getFullYear()} {s.name}. All rights reserved.
           </p>
 
-          <a
+          {/* <a
             href="#"
             className="group inline-flex items-center gap-2 transition-colors hover:text-cream"
           >
@@ -145,7 +145,7 @@ export default function Footer({ c }: { c: SiteContent }) {
                 <path d="M12 19V5M5 12l7-7 7 7" />
               </svg>
             </span>
-          </a>
+          </a> */}
         </div>
       </div>
 

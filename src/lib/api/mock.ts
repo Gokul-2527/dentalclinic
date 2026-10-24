@@ -46,7 +46,7 @@ treatments: [
       title: "Teeth whitening",
       summary: "Professional whitening to lift stains safely.",
       body: "Professional whitening to lift stains safely. Your dentist explains every option, the process and the costs before treatment begins. Results vary between patients.",
-      image: "/images/treatment/treatment_1.jpg",
+      image: "/images/treatment/Treatment_1.jpg",
       imageAlt: "Teeth whitening treatment",
     },
     {
@@ -54,7 +54,7 @@ treatments: [
       title: "Dental implants",
       summary: "Fixed replacements for missing teeth.",
       body: "Fixed replacements for missing teeth. Your dentist explains every option, the process and the costs before treatment begins. Results vary between patients.",
-      image: "/images/treatment/treatment_2.jpg",
+      image: "/images/treatment/Treatment_2.jpg",
       imageAlt: "Dental implants treatment",
     },
     {
@@ -62,7 +62,7 @@ treatments: [
       title: "Clear aligners",
       summary: "Discreet straightening with removable trays.",
       body: "Discreet straightening with removable trays. Your dentist explains every option, the process and the costs before treatment begins. Results vary between patients.",
-      image: "/images/treatment/treatment_3.webp",
+      image: "/images/treatment/Treatment_3.webp",
       imageAlt: "Clear aligners treatment",
     },
     {
@@ -70,7 +70,7 @@ treatments: [
       title: "Cosmetic dentistry",
       summary: "Refined shape, colour and balance.",
       body: "Refined shape, colour and balance. Your dentist explains every option, the process and the costs before treatment begins. Results vary between patients.",
-      image: "/images/treatment/treatment_4.jpg",
+      image: "/images/treatment/Treatment_4.jpg",
       imageAlt: "Cosmetic dentistry treatment",
     },
     {
@@ -78,7 +78,7 @@ treatments: [
       title: "Preventive dental care",
       summary: "Check-ups and cleanings that prevent problems.",
       body: "Check-ups and cleanings that prevent problems. Your dentist explains every option, the process and the costs before treatment begins. Results vary between patients.",
-      image: "/images/treatment/treatment_5.jpg",
+      image: "/images/treatment/Treatment_5.jpg",
       imageAlt: "Preventive dental care treatment",
     },
     {
@@ -86,7 +86,7 @@ treatments: [
       title: "Smile makeovers",
       summary: "A combined plan for a complete change.",
       body: "A combined plan for a complete change. Your dentist explains every option, the process and the costs before treatment begins. Results vary between patients.",
-      image: "/images/treatment/treatment_6.jpeg",
+      image: "/images/treatment/Treatment_6.jpeg",
       imageAlt: "Smile makeovers treatment",
     },
   ],

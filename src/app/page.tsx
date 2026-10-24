@@ -3,7 +3,6 @@ import { getSiteContent } from "@/lib/api/client";
 import { buildMetadata } from "@/lib/seo/metadata";
 import Button from "@/components/ui/Button";
 import HeroReveal from "@/components/animation/HeroReveal";
-import RevealImage from "@/components/animation/RevealImage";
 import StorySection from "@/components/sections/StorySection";
 import TreatmentsSection from "@/components/sections/TreatmentsSection";
 import FaqSection from "@/components/sections/FaqSection";
@@ -13,8 +12,8 @@ import AboutGallery from "@/components/animation/AboutGallery";
 import ScrollIndicator from "@/components/animation/ScrollIndicator";
 import TestimonialsMarquee from "@/components/animation/TestimonialsMarquee";
 import DoctorsSection from "@/components/sections/DoctorsSection";
-import ContactSection from "@/components/sections/ContactSection";
 import { AboutPillars, AboutStats } from "@/components/sections/AboutExtras";
+import Navbar from "@/components/layout/Navbar";
 
 export const revalidate = 300;
 export const metadata = buildMetadata({
@@ -31,8 +30,12 @@ export default async function Home() {
     doctors,
     faqs,
   } = await getSiteContent();
+
   return (
     <>
+      {/* Render Navbar here and pass name prop */}
+      <Navbar name={s.name || "Clinic"} />
+
       <div className="">
         {/* Shared background image */}
         <div className="pointer-events-none fixed inset-0 -z-10 bg-rust">
@@ -44,15 +47,12 @@ export default async function Home() {
             sizes="100vw"
             className="object-cover"
           />
-
-          {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-ember/70 via-ember/20 to-transparent" />
         </div>
 
         {/* HERO SECTION */}
         <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-transparent px-6">
           <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 pt-24 md:grid-cols-2">
-            {/* Left Side: Headline and CTA */}
             <HeroReveal className="text-cream">
               <h1
                 data-hero
@@ -60,7 +60,6 @@ export default async function Home() {
               >
                 {(() => {
                   const w = s.hero.headline.replace(/\.$/, "").split(" ");
-
                   return (
                     <>
                       <span className="text-peach">
@@ -80,14 +79,12 @@ export default async function Home() {
 
               <div data-hero className="mt-8 flex flex-wrap gap-4">
                 <Button href="#appointment">Book an appointment</Button>
-
                 <Button href="#treatments" variant="glass">
                   Explore our treatments
                 </Button>
               </div>
             </HeroReveal>
 
-            {/* Right Side: Floating Teeth Image */}
             <div className="relative flex items-center justify-center">
               <div className="relative h-72 w-72 animate-float md:h-[650px] md:w-[650px]">
                 <Image
@@ -100,13 +97,15 @@ export default async function Home() {
                 />
               </div>
             </div>
-          </div>{" "}
+          </div>
           <ScrollIndicator href="#about" />
         </section>
 
         {/* ABOUT SECTION */}
-        {/* description, stats, gallery, pillars */}
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-20 px-6 pb-28 pt-10">
+        <section
+          id="about"
+          className="mx-auto flex w-full max-w-7xl flex-col items-center gap-20 px-6 pb-28 pt-10 scroll-mt-24"
+        >
           <CurvedMarquee
             text="Dentistry that listens first."
             tilt={-8}
@@ -128,15 +127,21 @@ export default async function Home() {
           />
 
           <AboutGallery />
-
           <AboutPillars />
-        </div>
+        </section>
       </div>
-      <StorySection story={s.story} />
-      <TreatmentsSection treatments={treatments} />
+
+      <div id="story" className="scroll-mt-24">
+        <StorySection story={s.story} />
+      </div>
+
+      <div id="treatments" className="scroll-mt-24">
+        <TreatmentsSection treatments={treatments} />
+      </div>
+
       <section
         id="testimonials"
-        className="overflow-hidden px-6 py-24 bg-white"
+        className="overflow-hidden px-6 py-24 bg-white scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl">
           <p className="text-xs font-medium uppercase tracking-[0.35em] text-ember/60">
@@ -157,19 +162,22 @@ export default async function Home() {
           )}
         </div>
       </section>
-      <DoctorsSection doctors={doctors} />
-      <AppointmentSection
-        treatments={treatments}
-        phone={s.phone}
-        hours={s.hours}
-      />{" "}
-      <FaqSection faqs={faqs} phone={s.phone} />
-      {/* <ContactSection
-        address={s.address}
-        hours={s.hours}
-        phone={s.phone}
-        email={s.email}
-      /> */}
+
+      <div id="doctors" className="scroll-mt-24">
+        <DoctorsSection doctors={doctors} />
+      </div>
+
+      <div id="appointment" className="scroll-mt-24">
+        <AppointmentSection
+          treatments={treatments}
+          phone={s.phone}
+          hours={s.hours}
+        />
+      </div>
+
+      <div id="contact" className="scroll-mt-24">
+        <FaqSection faqs={faqs} phone={s.phone} />
+      </div>
     </>
   );
 }
