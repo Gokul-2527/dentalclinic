@@ -14,6 +14,7 @@ import TestimonialsMarquee from "@/components/animation/TestimonialsMarquee";
 import DoctorsSection from "@/components/sections/DoctorsSection";
 import { AboutPillars, AboutStats } from "@/components/sections/AboutExtras";
 import Navbar from "@/components/layout/Navbar";
+import RotatingHeroHeadline from "@/components/animation/RotatingHeroHeadline";
 
 export const revalidate = 300;
 export const metadata = buildMetadata({
@@ -54,24 +55,7 @@ export default async function Home() {
         <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-transparent px-6">
           <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 pt-24 md:grid-cols-2">
             <HeroReveal className="text-cream">
-              <h1
-                data-hero
-                className="max-w-3xl font-sans text-[clamp(2.8rem,6vw,5.5rem)] font-light leading-[1] tracking-tight"
-              >
-                {(() => {
-                  const w = s.hero.headline.replace(/\.$/, "").split(" ");
-                  return (
-                    <>
-                      <span className="text-peach">
-                        {w.slice(0, -2).join(" ")}{" "}
-                      </span>
-                      <span className="text-white">
-                        {w.slice(-2).join(" ")}
-                      </span>
-                    </>
-                  );
-                })()}
-              </h1>
+              <RotatingHeroHeadline initialHeadline={s.hero.headline} />
 
               <p data-hero className="mt-6 max-w-lg text-lg text-cream/85">
                 {s.hero.description}
