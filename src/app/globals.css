@@ -53,6 +53,23 @@ body { @apply bg-cream font-sans text-cocoa antialiased; }
   100% { opacity: 0; transform: translateY(6px); }
 }
 
+@keyframes hero-letter-reveal {
+  from { opacity: 0; transform: translateY(0.35em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-letter-reveal {
+  animation: hero-letter-reveal 420ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .animate-scroll-arrow {
   animation: scroll-arrow 1.6s ease-in-out infinite;
 }
