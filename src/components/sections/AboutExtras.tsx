@@ -59,28 +59,50 @@ export function AboutStats({ stats }: { stats: Stat[] }) {
   const { ref, seen } = useInView<HTMLDivElement>(0.3);
 
   return (
-    <div
-      ref={ref}
-      className="grid w-full grid-cols-2 gap-px overflow-hidden rounded-3xl border border-cream/15 bg-cream/15 lg:grid-cols-4"
-    >
-      {stats.map((s, i) => (
-        <div
-          key={s.label}
-          className={`bg-ember/60 px-6 py-8 text-center backdrop-blur-md transition-all duration-700 ease-out motion-reduce:transition-none ${
-            seen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
-          style={{ transitionDelay: seen ? `${i * 120}ms` : "0ms" }}
-        >
-          <p className="font-serif text-5xl leading-none text-peach md:text-6xl">
-            <CountUp to={s.value} start={seen} />
-            {s.suffix}
+    <section ref={ref} aria-labelledby="about-stats-title" className="w-full">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-[0.3em] text-peach">
+            Our practice in numbers
           </p>
-          <p className="mt-3 text-xs uppercase tracking-[0.25em] text-cream/70">
-            {s.label}
-          </p>
+          <h2
+            id="about-stats-title"
+            className="mt-2 font-serif text-3xl leading-tight text-cream md:text-4xl"
+          >
+            Care that adds up.
+          </h2>
         </div>
-      ))}
-    </div>
+        <span
+          aria-hidden="true"
+          className="hidden h-px w-24 bg-peach/60 sm:block"
+        />
+      </div>
+
+      <div className="grid w-full grid-cols-2 border-y border-cream/20 py-2 lg:grid-cols-4 lg:py-5">
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            className={`relative border-cream/20 px-4 py-6 transition-all duration-700 ease-out motion-reduce:transition-none sm:px-6 lg:py-4 ${
+              i % 2 === 1 ? "border-l" : "border-l-0"
+            } ${i === 0 ? "lg:border-l-0" : "lg:border-l"} ${
+              seen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+            style={{ transitionDelay: seen ? `${i * 120}ms` : "0ms" }}
+          >
+            <span className="mb-4 block text-[10px] font-medium uppercase tracking-[0.25em] text-cream/45">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <p className="whitespace-nowrap font-serif text-4xl leading-none tabular-nums text-peach sm:text-5xl md:text-6xl">
+              <CountUp to={s.value} start={seen} />
+              {s.suffix}
+            </p>
+            <p className="mt-3 text-[11px] font-medium uppercase tracking-[0.18em] text-cream/75 sm:text-xs">
+              {s.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
